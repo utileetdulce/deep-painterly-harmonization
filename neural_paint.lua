@@ -24,6 +24,7 @@ cmd:option('-gpu', 0, 'Zero-indexed ID of the GPU to use; for CPU mode set -gpu 
 cmd:option('-init', 'image', 'random|image')
 cmd:option('-optimizer', 'lbfgs', 'lbfgs|adam')
 cmd:option('-learning_rate', 0.1)
+cmd:option('-lbfgs_num_correction', 0)
 
 -- Output options
 cmd:option('-print_iter', 50)
@@ -310,6 +311,9 @@ local function main(params)
       tolFun=-1,
       learningRate=params.learning_rate,
     }
+    if params.lbfgs_num_correction > 0 then
+      optim_state.nCorrection = params.lbfgs_num_correction
+    end
   elseif params.optimizer == 'adam' then
     optim_state = {
       learningRate = params.learning_rate,

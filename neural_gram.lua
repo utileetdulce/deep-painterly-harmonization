@@ -28,6 +28,8 @@ cmd:option('-normalize_gradients', false)
 cmd:option('-init', 'image', 'random|image')
 cmd:option('-optimizer', 'lbfgs', 'lbfgs|adam')
 cmd:option('-learning_rate', 1e1)
+cmd:option('-lbfgs_num_correction', 0)
+
 
 -- Output options
 cmd:option('-print_iter', 50)
@@ -184,6 +186,9 @@ local function main(params)
       maxIter = params.num_iterations,
       verbose=true,
     }
+    if params.lbfgs_num_correction > 0 then
+      optim_state.nCorrection = params.lbfgs_num_correction
+    end
   elseif params.optimizer == 'adam' then
     optim_state = {
       learningRate = params.learning_rate,
