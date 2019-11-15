@@ -7,7 +7,7 @@ LDFLAGS_NVCC=-L$(PREFIX)/lib -Xlinker -rpath,$(PREFIX)/lib -lluaT -lTHC -lTH -lp
 all: libcuda_utils.so 
 
 libcuda_utils.so: cuda_utils.cu
-	$(NVCC_PREFIX)/nvcc -arch sm_6.0 -O3 -DNDEBUG -Xcompiler -fopenmp --compiler-options '-fPIC' -o libcuda_utils.so --shared cuda_utils.cu $(CFLAGS) $(LDFLAGS_NVCC)
+	$(NVCC_PREFIX)/nvcc -arch sm_61 -O3 -DNDEBUG -Xcompiler -fopenmp --compiler-options '-fPIC' -o libcuda_utils.so --shared cuda_utils.cu $(CFLAGS) $(LDFLAGS_NVCC)
 
 clean:
 	find . -type f | xargs -n 5 touch
